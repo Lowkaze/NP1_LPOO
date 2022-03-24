@@ -1,5 +1,7 @@
 package primeiro_exercicio;
 
+import java.time.LocalDate;
+
 public class Pessoa {
     private String nome;
     private String dataDeNascimento;
@@ -33,5 +35,15 @@ public class Pessoa {
         System.out.println("Nome: " + this.nome);
         System.out.println("Data de nascimento: " + this.dataDeNascimento);
         System.out.println("Altura: " + this.altura);
+    }
+
+    public int calcularIdade() {
+        String dataDeNascimento = this.dataDeNascimento;
+        String[] dataSeparada = dataDeNascimento.split("/");
+
+        int anoDeNascimento = Integer.parseInt(dataSeparada[2]);
+        int anoAtual = LocalDate.now().getYear();
+
+        return anoAtual - anoDeNascimento;
     }
 }
