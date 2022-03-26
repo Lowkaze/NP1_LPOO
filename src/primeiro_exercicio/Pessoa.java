@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Pessoa {
     private String nome;
     private String dataDeNascimento;
-    private double altura;
+    private float altura;
 
     public String getNome() {
         return nome;
@@ -23,27 +23,27 @@ public class Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    public double getAltura() {
+    public float getAltura() {
         return altura;
     }
 
-    public void setAltura(double altura) {
+    public void setAltura(float altura) {
         this.altura = altura;
     }
 
-    public void exibir() {
+    public void imprimirPessoa() {
         System.out.println("Nome: " + this.nome);
         System.out.println("Data de nascimento: " + this.dataDeNascimento);
         System.out.println("Altura: " + this.altura);
     }
 
-    public int calcularIdade() {
+    public void calcularIdade() {
         String dataDeNascimento = this.dataDeNascimento;
         String[] dataSeparada = dataDeNascimento.split("/");
 
         int anoDeNascimento = Integer.parseInt(dataSeparada[2]);
         int anoAtual = LocalDate.now().getYear();
 
-        return anoAtual - anoDeNascimento;
+        System.out.println(anoAtual - anoDeNascimento);
     }
 }
