@@ -1,11 +1,13 @@
 package primeiro_exercicio;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class Pessoa {
     private String nome;
     private String dataDeNascimento;
-    private float altura;
+    private double altura;
 
     public String getNome() {
         return nome;
@@ -23,11 +25,11 @@ public class Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    public float getAltura() {
+    public double getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 
@@ -38,12 +40,19 @@ public class Pessoa {
     }
 
     public void calcularIdade() {
-        String dataDeNascimento = this.dataDeNascimento;
-        String[] dataSeparada = dataDeNascimento.split("/");
+        try {
+            DateTimeFormatter formatoDaData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dataDeNascimento = LocalDate.parse(this.dataDeNascimento, formatoDaData);
+            LocalDate dataAtual = LocalDate.now();
+            Period idade = Period.between(dataDeNascimento, dataAtual);
 
-        int anoDeNascimento = Integer.parseInt(dataSeparada[2]);
-        int anoAtual = LocalDate.now().getYear();
+            String anos = idade.getYears() == 1 || idade.getYears() == -1 ? idade.getYears() + " ano, " : idade.getYears() + " anos, ";
+            String meses = idade.getMonths() == 1 || idade.getMonths() == -1 ? idade.getMonths() + " mês e " : idade.getMonths() + " meses e ";
+            String dias = idade.getDays() == 1 || idade.getDays() == -1 ? idade.getDays() + " dia" : idade.getDays() + " dias";
 
-        System.out.println(anoAtual - anoDeNascimento);
+            System.out.println("Idade: " + anos + meses + dias);
+        } catch (NullPointerException nullPointerException) {
+            System.out.println("Defina uma data de nascimento!");
+        }
     }
 }
